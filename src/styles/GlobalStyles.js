@@ -15,11 +15,16 @@ export default createGlobalStyle`
   *, button, input {
     border: 0;
     background: none;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Roboto", sans-serif;
   }
 
   ul {
     list-style: none;
     padding-left: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: #fff;
   }
 `;

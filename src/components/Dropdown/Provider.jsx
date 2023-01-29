@@ -57,5 +57,21 @@ export function DropdownProvider({ children }) {
     if (targetId) setCasheId(targetId);
   }, [targetId]);
 
-  return <Context.Provider value={{}}>{children}</Context.Provider>;
+  return (
+    <Context.Provider
+      value={{
+        registerOption,
+        updateOptionProps,
+        getOptionById,
+        deleteOptionById,
+        setTargetId,
+        setCasheId,
+        options,
+        targetId,
+        casheId,
+      }}
+    >
+      {children}
+    </Context.Provider>
+  );
 }

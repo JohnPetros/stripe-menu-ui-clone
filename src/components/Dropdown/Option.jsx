@@ -15,10 +15,8 @@ export function DropdownOption({ name, content: Content, backgroundHeight }) {
   const {
     registerOption,
     updateOptionProps,
-    getOptionById,
     deleteOptionById,
     setTargetId,
-    options,
     targetId,
   } = useContext(Context);
 
@@ -26,19 +24,16 @@ export function DropdownOption({ name, content: Content, backgroundHeight }) {
     if (!registered && optionDimensions) {
       const WrappedContent = () => {
         const contentRef = useRef();
-
         useEffect(() => {
           const contentDimensions = contentRef.current.getBoundingClientRect();
           updateOptionProps(id, { contentDimensions });
         }, []);
-
         return (
           <div ref={contentRef}>
             <Content />
           </div>
         );
       };
-
       registerOption({
         id,
         optionDimensions,
@@ -46,7 +41,6 @@ export function DropdownOption({ name, content: Content, backgroundHeight }) {
         WrappedContent,
         backgroundHeight,
       });
-
       setRegistered(true);
     } else if (registered && optionDimensions) {
       updateOptionProps(id, {
@@ -58,9 +52,9 @@ export function DropdownOption({ name, content: Content, backgroundHeight }) {
     id,
     registered,
     registerOption,
-    optionDimensions,
-    updateOptionProps,
     deleteOptionById,
+    updateOptionProps,
+    optionDimensions,
     backgroundHeight,
   ]);
 

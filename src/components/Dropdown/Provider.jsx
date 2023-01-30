@@ -5,7 +5,7 @@ export const Context = createContext();
 export function DropdownProvider({ children }) {
   const [options, setOptions] = useState([]);
   const [targetId, setTargetId] = useState(null);
-  const [casheId, setCasheId] = useState(null);
+  const [cachedId, setCachedId] = useState(null);
 
   const registerOption = useCallback(
     ({
@@ -15,8 +15,8 @@ export function DropdownProvider({ children }) {
       WrappedContent,
       backgroundHeight,
     }) => {
-      setOptions((options) => [
-        ...options,
+      setOptions((items) => [
+        ...items,
         {
           id,
           optionDimensions,
@@ -31,13 +31,15 @@ export function DropdownProvider({ children }) {
 
   const updateOptionProps = useCallback(
     (optionId, props) => {
-      setOptions((options) => {
-        options.map((option) => {
-          if (option.id === optionId) {
+      setOptions((items) =>
+        items.map((item) => {
+          if (item.id === optionId) {
+            item = { ...item, ...props };
           }
-          return option;
-        });
-      });
+
+          return item;
+        })
+      );
     },
     [setOptions]
   );
@@ -54,7 +56,7 @@ export function DropdownProvider({ children }) {
   );
 
   useEffect(() => {
-    if (targetId) setCasheId(targetId);
+    if (targetId) setCachedId(targetId);
   }, [targetId]);
 
   return (
@@ -64,11 +66,11 @@ export function DropdownProvider({ children }) {
         updateOptionProps,
         getOptionById,
         deleteOptionById,
-        setTargetId,
-        setCasheId,
         options,
         targetId,
-        casheId,
+        setTargetId,
+        cachedId,
+        setCachedId,
       }}
     >
       {children}

@@ -1,26 +1,29 @@
 import { Container, DropdownStyles } from "./styles";
-import { DropdownOption } from "../DropdownOption";
+import { DropdownOption, DropdownProvider, DropdownRoot } from "../Dropdown";
+import { Products } from "../Content";
+import { Developers } from "../Content";
+import { Company } from "../Content";
 
 function Navbar() {
   return (
-    <DropdownStyles>
-      <Container>
-        <ul>
-          <li className="dropdown-option">
-            <DropdownOption name="Produtos" content={() => <h1>Produtos</h1>} />
-          </li>
-          <li className="dropdown-option">
-            <DropdownOption
-              name="Desenvolvedores"
-              content={() => <h1>Desenvolvedores</h1>}
-            />
-          </li>
-          <li className="dropdown-option">
-            <DropdownOption name="Empresa" content={() => <h1>Empresa</h1>} />
-          </li>
-        </ul>
-      </Container>
-    </DropdownStyles>
+    <DropdownProvider>
+      <DropdownStyles>
+        <Container>
+          <ul>
+            <li className="dropdown-option">
+              <DropdownOption name="Produtos" content={Products} />
+            </li>
+            <li className="dropdown-option">
+              <DropdownOption name="Desenvolvedores" content={Developers} />
+            </li>
+            <li className="dropdown-option">
+              <DropdownOption name="Empresa" content={Company} />
+            </li>
+          </ul>
+        </Container>
+        <DropdownRoot />
+      </DropdownStyles>
+    </DropdownProvider>
   );
 }
 
